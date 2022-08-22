@@ -8,6 +8,8 @@ let prodData = JSON.parse(data);
 
 app.use(express.json())
 const PORT = 7000;
+
+// Qestion-1
 app.post('/getmeip', (req, res) => {
     const url = req.body.website_name;
     console.log(url)
@@ -19,6 +21,9 @@ app.post('/getmeip', (req, res) => {
 
 })
 
+
+
+// Question-2
 // get data
 app.get('/products', (req, res) => {
     return res.status(200).send(prodData);
@@ -38,17 +43,7 @@ app.post('/products/create',(req,res) => {
 app.delete('/products/:productId',(req,res)=>{
     const { productId } = req.params;
     console.log("id",productId)
-    // let index = null;
     let index = prodData.findIndex(product => product.id == productId);
-    // prodData.forEach((prod, i) => {
-    //     if (prod.id == productId) {
-    //         index = i;
-    //     }
-    //     if(index == null){
-    //         throw new Error('product not found')
-    //     }
-    //     prodData.splice(index,1)
-    // })
     if(index == -1){
         return res.status(404).send({
             message: 'Product not found'
